@@ -1,0 +1,3 @@
+class automata():
+    nodos = ""
+    abcdario = ""
