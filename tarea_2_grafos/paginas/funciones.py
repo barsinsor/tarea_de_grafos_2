@@ -37,32 +37,30 @@ def validacion(palabra1,palabra2,auto1, auto2):
 
 
 def transiciones (tran,num):
-    tran = tran.split(',')
+    tra = " ".join(tran)
+    trans = tra.split(',')
     cont = 0
     conta = 0
     contb = 0
     contc = 0
-    inicio
-    final
-    letra
-    for i in tran:
+    inicio = []
+    final = []
+    letra = []
+    for i in trans:
         if (cont == 0):
-            inicio[conta] = i
-            cont +=1
+            inicio.append(i)
             conta +=1
         if (cont == 1):
-            final[contb] = i
-            cont +=1
+            final.append(i)
             contb +=1
         if (cont == 2):
-            letra[contc] = i
-            cont = 0
+            letra.append(i)
+            cont = -1
             contc +=1
+        cont +=1
     if(num == 0):
         return inicio
     if(num == 1):
-        return final
+        return final 
     if(num ==2):
         return letra
-    else:
-        return 0

@@ -18,10 +18,18 @@ def aplicacion(request):
         ab2 = request.POST['abcdario2']
         trans1 = request.POST['transicion1']
         trans2 = request.POST['transicion2']
+        str(trans1)
+        str(trans2)
+        str(a1)
+        str(a2)
+        str(ab1)
+        str(ab2)
         arraytrans1 = trans1.split(';')
+        arraytrans1 = "".join(arraytrans1)
         arraytrans2 = trans2.split(';')
-        palabra1 = request.POST['parabra1']
-        palabra2 = request.POST['parabra2']
+        arraytrans2 = "".join(arraytrans2)
+        palabra1 = request.POST['palabra1']
+        palabra2 = request.POST['palabra2']
         auto1.nodos = a1.split(';')
         auto2.nodos = a2.split(';')
         auto1.abcdario = ab1.split(';')
@@ -46,9 +54,4 @@ def aplicacion(request):
         unioninicios = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 0)
         unionfinales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 1)
         unionletras = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 2)
-        return render('aplicacion.html', {
-                'union_inicios': unioninicios,
-                'union_finales': unionfinales,
-                'union_letras': unionletras,
-                }, RequestContext(request))
     return render(request, 'aplicacion.html')
