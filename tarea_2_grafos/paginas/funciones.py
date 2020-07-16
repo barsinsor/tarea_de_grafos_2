@@ -64,3 +64,13 @@ def transiciones (tran,num):
         return final 
     if(num ==2):
         return letra
+
+def complemento (auto):
+    nodos = auto.nodos
+    finales = auto.finales
+    finales1 = []
+    aux = 0
+    for i in nodos:
+        if (finales.count(i) == 0):
+            finales1.append(i)
+    return finales1

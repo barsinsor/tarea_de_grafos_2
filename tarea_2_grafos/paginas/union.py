@@ -4,11 +4,17 @@ from paginas.views import *
 def union (auto1, auto2, inicios, inicios2, letras1, letras2, finales1, finales2, num):
     nodo1 = auto1.nodos
     nodo2 = auto2.nodos
+    ini1 = auto1.inicial
+    ini2 = auto2.inicial
+    fin1 = auto1.finales
+    fin2 = auto2.finales
     cont = 0
     cont2 = 0
     unioninicios = ""
     unionfinales = ""
     unionletras = ""
+    unionodoinicial = ""
+    unionodofinales = ""
     auxnum = []
     auxnum2 = []
     for i in nodo1:
@@ -51,9 +57,34 @@ def union (auto1, auto2, inicios, inicios2, letras1, letras2, finales1, finales2
                         unioninicios = unioninicios + i + j + ';'
                         unionfinales = unionfinales + finales1[auxm] + finales2[auxn] + ';'
                         unionletras = unionletras + letras1[auxm] + ';'
+    
+
+    for i in nodo1:
+        for j in nodo2:
+            if(i == ini1 and j == ini2):
+                unionodoinicial = i + j
+
+    for i in nodo1:
+        for j in nodo2:
+            for k in fin1:
+                for l in fin2:
+                    ma = " " + i 
+                    me = i + " "
+                    mi = " " + i + " "
+                    na = " "+ j
+                    ne = j + " "
+                    ni = " " + j + " "
+                    if (j == l or l == na or l == ne or l == ni or k == i or k == ma or k == me or k == mi):
+                        unionodofinales = unionodofinales + i + j + ";"
+
+    
     if(num == 0):
         return unioninicios
     if(num == 1):
         return unionfinales
-    if(num == 3):
+    if(num == 2):
         return unionletras
+    if (num == 3):
+        return unionodoinicial
+    if (num == 4):
+        return unionodofinales
