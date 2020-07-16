@@ -2,9 +2,12 @@ from django.shortcuts import render
 from paginas.clases import *
 from paginas.funciones import *
 from paginas.union import *
-
+from django.template import RequestContext
 # Create your views here.
-def index(request):
+def index(request):      
+    return render(request, 'index.html')
+
+def aplicacion(request):
     if (request.method == 'POST'):
         auto1 = automata()
         auto2 = automata()
@@ -30,21 +33,22 @@ def index(request):
         letras1 = transiciones(arraytrans1,2)
         letras2 = transiciones(arraytrans2,2)
 
-        vali = validacion(palabra1,palabra2,auto1,auto2)
-        if(vali == 0):
-            print ("los abcdarios pertenecen a los automatas")
-        if (vali == 1):
-            print("el abcdario del automata1 no pertenece")
-        if (vali == 2):
-            print("el abcdario del automata2 no pertenece")
-        else:
-            print("problemas con la validacion")
+        #vali = validacion(palabra1,palabra2,auto1,auto2)
+        #if(vali == 0):
+        #    print ("los abcdarios pertenecen a los automatas")
+        #if (vali == 1):
+            #print("el abcdario del automata1 no pertenece")
+        #if (vali == 2):
+            #print("el abcdario del automata2 no pertenece")
+        #else:
+            #print("problemas con la validacion")
 
         unioninicios = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 0)
         unionfinales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 1)
         unionletras = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 2)
-         
-    return render(request, 'index.html')
-
-def aplicacion(request):
+        return render('aplicacion.html', {
+                'union_inicios': unioninicios,
+                'union_finales': unionfinales,
+                'union_letras': unionletras,
+                }, RequestContext(request))
     return render(request, 'aplicacion.html')
