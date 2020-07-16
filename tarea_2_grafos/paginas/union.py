@@ -17,6 +17,7 @@ def union (auto1, auto2, inicios, inicios2, letras1, letras2, finales1, finales2
     unionodofinales = ""
     auxnum = []
     auxnum2 = []
+    intersec = []
     for i in nodo1:
         for j in nodo2:
             for k in inicios:
@@ -58,13 +59,14 @@ def union (auto1, auto2, inicios, inicios2, letras1, letras2, finales1, finales2
                         unionfinales = unionfinales + finales1[auxm] + finales2[auxn] + ';'
                         unionletras = unionletras + letras1[auxm] + ';'
     
+    for i in nodo1:                                                                 #crea str nodos iniciales de la union
+            for j in nodo2:
+                for k in ini1:
+                    for l in ini2:
+                        if(i == k and j == l):
+                            unionodoinicial = i + j
 
-    for i in nodo1:
-        for j in nodo2:
-            if(i == ini1 and j == ini2):
-                unionodoinicial = i + j
-
-    for i in nodo1:
+    for i in nodo1:                                                                    #crea str nodos finales de la union
         for j in nodo2:
             for k in fin1:
                 for l in fin2:
@@ -77,6 +79,18 @@ def union (auto1, auto2, inicios, inicios2, letras1, letras2, finales1, finales2
                     if (j == l or l == na or l == ne or l == ni or k == i or k == ma or k == me or k == mi):
                         unionodofinales = unionodofinales + i + j + ";"
 
+    
+    if (num == 5):                              #crea lista de los nodos finales de la interseccion
+        for i in nodo1:
+            for j in nodo2:
+                for k in fin1:
+                    for l in fin2:
+                        if(i == k and j == l):
+                            intersec.append(i+j)
+        return intersec
+    
+    
+    
     
     if(num == 0):
         return unioninicios

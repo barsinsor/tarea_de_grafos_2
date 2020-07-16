@@ -10,9 +10,14 @@ def index(request):
 
 def aplicacion(request):
     if (request.method == 'POST'):
-        auto1 = automata()
+        auto1 = automata()                      #automatas entregados
         auto2 = automata()
-        autounion = automata()
+        autounion = automata()                  #automata union
+        autoInter = automata()                  #automata interseccion
+        auto1Com = automata()                   #complementos de los automatas anteriores
+        auto2Com = automata()
+        autoUnionCom = automata()
+        autoInterCom = automata()
         a1 = request.POST['nodos1']
         a2 = request.POST['nodos2']
         ab1 = request.POST['abcdario1']
@@ -61,11 +66,20 @@ def aplicacion(request):
         #else:
             #print("problemas con la validacion")
 
-        unioninicios = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 0)
+        unioninicios = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 0)               #Entrega los datos de la union
         unionfinales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 1)
         unionletras = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 2)
         autounion.inicial = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 3)
         autounion.finales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 4)
+        interInicios = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 0)               #entrega datos de la interseccion
+        interFinales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 1)
+        interLetras = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 2)
+        autoInter.iniciales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 3)
+        autoInter.finales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 5)
+
+        auto1Com = auto1                                                                                            #complemento
+        auto1Com.finales = complemento (auto1)
+
         for i in unioninicios.split(';'):
             if i not in uninicios1:
                 uninicios1.append(i)
