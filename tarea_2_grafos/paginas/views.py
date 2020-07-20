@@ -79,6 +79,8 @@ def aplicacion(request):
 
         auto1Com = auto1                                                                                            #complemento
         auto1Com.finales = complemento (auto1)
+        NodosLista1 = crearNodos(finales1, letras1, auto1)
+        NodosLista2 = crearNodos(finales2, letras2, auto2)
 
         for i in unioninicios.split(';'):
             if i not in uninicios1:

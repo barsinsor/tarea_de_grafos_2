@@ -74,3 +74,29 @@ def complemento (auto):
         if (finales.count(i) == 0):
             finales1.append(i)
     return finales1
+
+def crearNodos(finales, letras, auto):
+    cantidadNodos = len(auto.nodos)
+    automata = []
+    cont = 0
+    x = len(auto.nodos)
+    aux = 0
+    aux1 = 0
+    while(cantidadNodos > 0):
+        nodito = PropNodo()
+        nodito.nodo = auto.nodos[aux]
+        print ('a')
+        while(x >  0):
+            a = finales[aux1]
+            nodito.nodoFin = nodito.nodoFin + a + ';'
+            y = letras [aux1]
+            nodito.condicion = nodito.condicion + y + ';'
+            x = x - 1
+            aux1 = aux1 + 1
+        automata.append(nodito)
+        cantidadNodos = cantidadNodos - 1
+        cont = cont + 1
+        aux = aux + 1
+        x = len(auto.nodos)
+
+    return automata
