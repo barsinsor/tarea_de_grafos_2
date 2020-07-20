@@ -79,9 +79,11 @@ def aplicacion(request):
 
         auto1Com = auto1                                                                                            #complemento
         auto1Com.finales = complemento (auto1)
-
+        respuesta="no hay nada"
+        contexto={'respuestas':respuesta}   
         for i in unioninicios.split(';'):
             if i not in uninicios1:
                 uninicios1.append(i)
         autounion.nodos = uninicios1
+        return render(request,'aplicacion.html',contexto)
     return render(request, 'aplicacion.html')
