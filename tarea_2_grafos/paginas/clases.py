@@ -3,3 +3,8 @@ class automata():
     abcdario = ""
     inicial = ""
     finales = ""
+
+class PropNodo():
+    nodo = ""
+    nodoFin = ""
+    condicion = ""
