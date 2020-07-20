@@ -29,6 +29,8 @@ def aplicacion(request):
         af1 = request.POST['nodo_final1']
         af2 = request.POST['nodo_final2']
         uninicios1 = []
+        NodosLista1 = []
+        NodosLista2 = []
         str(trans1)
         str(trans2)
         str(a1)
@@ -86,4 +88,5 @@ def aplicacion(request):
             if i not in uninicios1:
                 uninicios1.append(i)
         autounion.nodos = uninicios1
+        return render(request,'aplicacion.html',contexto)
     return render(request, 'aplicacion.html')

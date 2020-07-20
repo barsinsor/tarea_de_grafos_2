@@ -74,7 +74,17 @@
                     </form>
                 <div class="col">
                     <div class="card bg-light mb-3" style="">
-                        <div class="card-header">Resultados:</div>
+                        <div class="card-header">Resultados:
+                        {% block content %}
+                            {% if respuestas %}
+                            {%for respuesta in respuestas %}
+                                <h1>{{respuesta}}</h1>
+                            {% endfor %}
+                            {% else %}
+                                <h1>no hay nada</h1>
+                            {% endif %}
+                        {% endblock %}
+                        </div>
                         <div class="card-body">
                         </div>
                     </div>
