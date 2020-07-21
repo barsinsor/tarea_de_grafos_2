@@ -1,0 +1,9 @@
+small {
+    transition: 0.3s;
+    color: #6c757d
+}
+
+small:hover {
+    font-size: 90%;
+    color: black;
+}
