@@ -23,65 +23,117 @@
                             <h3>Automata 1</h3>
                             <div class="form-group"> <!-- Definicion de nodos -->
                                 <label for="NodosDefinidos">K:</label>
-                                <input type="text" class="form-control" id="nodos1" name="nodos1" >
+                                <input type="text" class="form-control" id="nodos1" name="nodos1"placeholder="ingrese los nodos definidos de la siguiente forma ejemplo: a;b">
                             </div>
                             <div class="form-group"> <!-- Definicion de abecedario -->
                                 <label for="Abecedario">Σ:</label>
-                                <input type="text" class="form-control" id="abcdario1" name="abcdario1" >
+                                <input type="text" class="form-control" id="abcdario1" name="abcdario1"placeholder="ingrese abecedario ejemplo: 0;1">
                             </div>
                             <div class="form-group"> <!-- Definicion de transiciones -->
                                 <label for="Transiciones">δ:</label>
-                                <input type="text" class="form-control" id="transicion1" name="transicion1" >
+                                <input type="text" class="form-control" id="transicion1" name="transicion1"placeholder="ingrese transiciones ejemplo: a,a,0,;a,b,1,;b,b,0,;b,b,1" >
                             </div>
                             <div class="form-group"> <!-- Nodo inicial -->
                                 <label for="NodoInicial">S:</label>
-                                <input type="text" class="form-control" id="nodo_inicial1" name="nodo_inicial1" >
+                                <input type="text" class="form-control" id="nodo_inicial1" name="nodo_inicial1"placeholder="ingrese nodo inicial ejemplo: a" >
                             </div>
                             <div class="form-group"> <!-- Nodo Final -->
                                 <label for="NodoFinal">F:</label>
-                                <input type="text" class="form-control" id="nodo_final1" name="nodo_final1" >
+                                <input type="text" class="form-control" id="nodo_final1" name="nodo_final1" placeholder="ingrese nodo/s final ejemplo :b o a;b">
                             </div>
                             <div class="form-group"> <!-- Palabra automata -->
-                                <label for="PalabraVerificar">Palabra:</label>
-                                <input type="text" class="form-control" id="palabra1" name="palabra1" >
+                                <label for="PalabraVerificar">Palabra que desea ingresar al automata </label>
+                                <input type="text" class="form-control" id="palabra1" name="palabra1" placeholder="ejemplo: 1001" >
                             </div>
                             <h3>Automata 2</h3>
                             <div class="form-group"> <!-- Definicion de nodos -->
                                 <label for="NodosDefinidos">K:</label>
-                                <input type="text" class="form-control" id="nodos2" name="nodos2" >
+                                <input type="text" class="form-control" id="nodos2" name="nodos2" placeholder="ingrese los nodos definidos de la siguiente forma ejemplo: a;b">
                             </div>
                             <div class="form-group"> <!-- Definicion de abecedario -->
                                 <label for="Abecedario">Σ:</label>
-                                <input type="text" class="form-control" id="abcdario2" name="abcdario2" >
+                                <input type="text" class="form-control" id="abcdario2" name="abcdario2"placeholder="ingrese abecedario ejemplo: 0;1" >
                             </div>
                             <div class="form-group"> <!-- Definicion de transiciones -->
                                 <label for="Transiciones">δ:</label>
-                                <input type="text" class="form-control" id="transicion2" name="transicion2" >
+                                <input type="text" class="form-control" id="transicion2" name="transicion2"placeholder="ingrese transiciones ejemplo: a,a,0,;a,b,1,;b,b,0,;b,b,1" >
                             </div>
                             <div class="form-group"> <!-- Nodo inicial -->
                                 <label for="NodoInicial">S:</label>
-                                <input type="text" class="form-control" id="nodo_inicial2" name="nodo_inicial2" >
+                                <input type="text" class="form-control" id="nodo_inicial2" name="nodo_inicial2"placeholder="ingrese nodo inicial ejemplo:a" >
                             </div>
                             <div class="form-group"> <!-- Nodo Final -->
                                 <label for="NodoFinal">F:</label>
-                                <input type="text" class="form-control" id="nodo_final2" name="nodo_final2" >
+                                <input type="text" class="form-control" id="nodo_final2" name="nodo_final2"placeholder="ingrese nodo/s final ejemplo : b o a;b" >
                             </div>
                             <div class="form-group"> <!-- Palabra automata -->
-                                <label for="PalabraVerificar">Palabra:</label>
-                                <input type="text" class="form-control" id="palabra2" name="palabra2" >
+                                <label for="PalabraVerificar">Palabra que desea ingresar al automata </label>
+                                <input type="text" class="form-control" id="palabra2" name="palabra2" placeholder="ejemplo: 1001" >
                             </div>
                             <button type="submit" class="btn btn-primary">Aceptar</button>
                     </form>
                 <div class="col">
                     <div class="card bg-light mb-3" >
-                        <div class="card-header">Resultados:
+                        <div class="card-header">Resultados: </br>
                         {% block content %}
-                            {% if respuestas %}
-                            {%for respuesta in respuestas %}
-                                <h1>{{respuesta}}</h1>
+                            {% if inicios %}
+                            <label >transiciones de salida de la union: </label>
+                            {%for unioniniciosOrdenada in inicios %}
+                                <label>{{unioniniciosOrdenada}},</label>
                             {% endfor %}
+                            </br>
+                            <label >transiciones de llegada de la union: </label>
+                            {%for unionfinalesOrdenada in finales %}
+                                <label>{{unionfinalesOrdenada}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >letras del abecedario de la union: </label>
+                            {%for unionletras in letras %}
+                                <label>{{unionletras}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos iniciales del autamata de la union: </label>
+                            {%for autounion.inicial in automataunionI %}
+                                <label>{{autounion.inicial}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos finales del autamata de la union: </label>
+                            {%for autounion.finales in automataunionF %}
+                                <label>{{autounion.finales}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos inciales del autamata de la interseccion: </label>
+                            {%for interInicios in interinicios %}
+                                <label>{{interInicios}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos finales del autamata de la interseccion: </label>
+                            {%for interFinales in interfinales %}
+                                <label>{{interFinales}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >letras del abecedario de la interseccion: </label>
+                            {%for interLetras in interletras %}
+                                <label>{{interLetras}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos inciales del automata de la interseccion: </label>
+                            {%for variable1 in autointerI %}
+                                <label>{{variable1}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos finales del automata de la interseccion: </label>
+                            {%for variable2 in autointerF %}
+                            <label>{{variable2}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos finales del automata del complemento: </label>
+                            {%for variable3 in automatacom %}
+                            <label>{{variable3}}</label>
+                            {% endfor %}
+                            </br>
                             {% else %}
-                                <h1>no hay nada</h1>
+                                <h1>no se a ingresado nada</h1>
                             {% endif %}
                         {% endblock %}
                         </div>

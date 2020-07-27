@@ -100,3 +100,10 @@ def crearNodos(finales, letras, auto):
         x = len(auto.nodos)
 
     return automata
+
+def ordenar(lista):
+    listaOrdenada=[]
+    for i in lista.split(';'):
+        if i not in listaOrdenada:
+            listaOrdenada.append(i)
+    return listaOrdenada 

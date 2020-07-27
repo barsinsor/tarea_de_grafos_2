@@ -58,16 +58,6 @@ def aplicacion(request):
         letras1 = transiciones(arraytrans1,2)
         letras2 = transiciones(arraytrans2,2)
 
-        #vali = validacion(palabra1,palabra2,auto1,auto2)
-        #if(vali == 0):
-        #    print ("los abcdarios pertenecen a los automatas")
-        #if (vali == 1):
-            #print("el abcdario del automata1 no pertenece")
-        #if (vali == 2):
-            #print("el abcdario del automata2 no pertenece")
-        #else:
-            #print("problemas con la validacion")
-
         unioninicios = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 0)               #Entrega los datos de la union
         unionfinales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 1)
         unionletras = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 2)
@@ -83,10 +73,23 @@ def aplicacion(request):
         auto1Com.finales = complemento (auto1)
         NodosLista1 = crearNodos(finales1, letras1, auto1)
         NodosLista2 = crearNodos(finales2, letras2, auto2)
-
-        for i in unioninicios.split(';'):
-            if i not in uninicios1:
-                uninicios1.append(i)
-        autounion.nodos = uninicios1
+        unioniniciosOrdenada=ordenar(unioninicios)
+        unionfinalesOrdenada=ordenar(unionfinales)
+        autounion.nodos = unioniniciosOrdenada
+        variable1=autoInter.iniciales
+        variable2=autoInter.finales
+        variable3=auto1Com.finales
+        contexto={'inicios':unioniniciosOrdenada,
+                  'finales':unionfinalesOrdenada,
+                  'letras':unionletras,
+                  'automataunionI':autounion.inicial,
+                  'automataunionF':autounion.finales,
+                  'interinicios':interInicios,
+                  'interfinales':interFinales,
+                  'interletras':interLetras,
+                  'autointerI':variable1,
+                  'autointerF':variable2,
+                  'automatacom':variable3
+                }
         return render(request,'aplicacion.html',contexto)
     return render(request, 'aplicacion.html')
