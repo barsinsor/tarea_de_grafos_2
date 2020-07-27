@@ -1,93 +1,112 @@
-<html>
-    <head>
-        <title>Tarea 2 - Automatas</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
-        <script src="https://kit.fontawesome.com/c8152ea011.js" crossorigin="anonymous"></script>
-    </head>
-    
-    <header>
-        <nav class="navbar navbar-dark bg-dark">
-            <span class="navbar-brand mb-0 h1">Tarea 2 - Automatas</span>
-        </nav>
-    </header>
-    
-    <body>
-        <div class="container animate__animated animate__fadeIn">
-            <h1 class="text-center mt-2">Programa AFD y AFND</h1>
-                <div class="row mt-5">
-                    <form class="col">
-                            <h3>Automata 1</h3>
-                            <div class="form-group"> <!-- Definicion de nodos -->
-                                <label for="NodosDefinidos">K:</label>
-                                <input type="text" class="form-control" name="NodosDefinidos" pattern="">
-                            </div>
-                            <div class="form-group"> <!-- Definicion de abecedario -->
-                                <label for="Abecedario">Σ:</label>
-                                <input type="text" class="form-control" name="Abecedario" pattern="">
-                            </div>
-                            <div class="form-group"> <!-- Definicion de transiciones -->
-                                <label for="Transiciones">δ:</label>
-                                <input type="text" class="form-control" name="Transiciones" pattern="">
-                            </div>
-                            <div class="form-group"> <!-- Nodo inicial -->
-                                <label for="NodoInicial">S:</label>
-                                <input type="text" class="form-control" name="NodoInicial" pattern="">
-                            </div>
-                            <div class="form-group"> <!-- Nodo Final -->
-                                <label for="NodoFinal">F:</label>
-                                <input type="text" class="form-control" name="NodoFinal" pattern="">
-                            </div>
-                            <div class="form-group"> <!-- Palabra automata -->
-                                <label for="PalabraVerificar">Palabra:</label>
-                                <input type="text" class="form-control" name="PalabraVerificar" pattern="">
-                            </div>
-                            <h3>Automata 2</h3>
-                            <div class="form-group"> <!-- Definicion de nodos -->
-                                <label for="NodosDefinidos">K:</label>
-                                <input type="text" class="form-control" name="NodosDefinidos2" pattern="">
-                            </div>
-                            <div class="form-group"> <!-- Definicion de abecedario -->
-                                <label for="Abecedario">Σ:</label>
-                                <input type="text" class="form-control" name="Abecedario2" pattern="">
-                            </div>
-                            <div class="form-group"> <!-- Definicion de transiciones -->
-                                <label for="Transiciones">δ:</label>
-                                <input type="text" class="form-control" name="Transiciones2" pattern="">
-                            </div>
-                            <div class="form-group"> <!-- Nodo inicial -->
-                                <label for="NodoInicial">S:</label>
-                                <input type="text" class="form-control" name="NodoInicial2" pattern="">
-                            </div>
-                            <div class="form-group"> <!-- Nodo Final -->
-                                <label for="NodoFinal">F:</label>
-                                <input type="text" class="form-control" name="NodoFinal2" pattern="">
-                            </div>
-                            <div class="form-group"> <!-- Palabra automata -->
-                                <label for="PalabraVerificar">Palabra:</label>
-                                <input type="text" class="form-control" name="PalabraVerificar2" pattern="">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Aceptar</button>
-                    </form>
-                <div class="col">
-                    <div class="card bg-light mb-3" style="">
-                        <div class="card-header">Resultados:</div>
-                        <div class="card-body">
-                        </div>
+{% extends 'index.html' %}
+
+<head>
+    <title>{% block title %}Tarea 2 - Automatas{% endblock %}</title>
+</head>
+{% block body %}
+
+<body>
+    <div class="container animate__animated animate__fadeIn">
+        <h1 class="text-center mt-2">Programa AFD y AFND</h1>
+        <div class="row mt-5">
+            <form class="col" id="Autom" method="POST" action="{%url 'aplicacion'%}">
+                {% csrf_token %}
+                <h3>Automata 1</h3>
+                <div class="form-group">
+                    <!-- Definicion de nodos -->
+                    <label for="NodosDefinidos">K:</label>
+                    <input type="text" class="form-control" id="nodos1" name="nodos1" placeholder="Ejemplo: q0;q1;q2">
+                    <small>Ayuda: Conjunto de identificadores de estados</small>
+                </div>
+                <div class="form-group">
+                    <!-- Definicion de abecedario -->
+                    <label for="Abecedario">Σ:</label>
+                    <input type="text" class="form-control" id="abcdario1" name="abcdario1" placeholder="Ejemplos: a;b...;etc / 0;1...;etc">
+                    <small>Ayuda: Alfabeto de entrada</small>
+                </div>
+                <div class="form-group">
+                    <!-- Definicion de transiciones -->
+                    <label for="Transiciones">δ:</label>
+                    <input type="text" class="form-control" id="transicion1" name="transicion1" placeholder="Ejemplo: q0,q1,a;q0,q2,b">
+                    <small>Ayuda: Funcion de transicion (Nodo inicio, nodo destino, condicion)</small>
+                </div>
+                <div class="form-group">
+                    <!-- Nodo inicial -->
+                    <label for="NodoInicial">S:</label>
+                    <input type="text" class="form-control" id="nodo_inicial1" name="nodo_inicial1" placeholder="Ejemplo: q0">
+                    <small>Ayuda: Nodo inicial</small>
+                </div>
+                <div class="form-group">
+                    <!-- Nodo Final -->
+                    <label for="NodoFinal">F:</label>
+                    <input type="text" class="form-control" id="nodo_final1" name="nodo_final1" placeholder="Ejemplo: q1;q2">
+                    <small>Ayuda: Estados finales</small>
+                </div>
+                <div class="form-group">
+                    <!-- Palabra automata -->
+                    <label for="PalabraVerificar">Palabra:</label>
+                    <input type="text" class="form-control" id="palabra1" name="palabra1" placeholder="Ejemplo: abaa">
+                </div>
+                <h3>Automata 2</h3>
+                <div class="form-group">
+                    <!-- Definicion de nodos -->
+                    <label for="NodosDefinidos">K:</label>
+                    <input type="text" class="form-control" id="nodos2" name="nodos2" placeholder="Ejemplo: q0;q1;q2">
+                    <small>Ayuda: Conjunto de identificadores de estados</small>
+                </div>
+                <div class="form-group">
+                    <!-- Definicion de abecedario -->
+                    <label for="Abecedario">Σ:</label>
+                    <input type="text" class="form-control" id="abcdario2" name="abcdario2" placeholder="Ejemplos: a;b...;etc / 0;1...;etc">
+                    <small>Ayuda: Alfabeto de entrada</small>
+                </div>
+                <div class="form-group">
+                    <!-- Definicion de transiciones -->
+                    <label for="Transiciones">δ:</label>
+                    <input type="text" class="form-control" id="transicion2" name="transicion2" placeholder="Ejemplo: q0;q1;a;q0;q2;b">
+                    <small>Ayuda: Funcion de transicion (Nodo inicio, nodo destino, condicion)</small>
+                </div>
+                <div class="form-group">
+                    <!-- Nodo inicial -->
+                    <label for="NodoInicial">S:</label>
+                    <input type="text" class="form-control" id="nodo_inicial2" name="nodo_inicial2" placeholder="Ejemplo: q0">
+                    <small>Ayuda: Nodo inicial</small>
+                </div>
+                <div class="form-group">
+                    <!-- Nodo Final -->
+                    <label for="NodoFinal">F:</label>
+                    <input type="text" class="form-control" id="nodo_final2" name="nodo_final2" placeholder="Ejemplo: q1;q2">
+                    <small>Ayuda: Estados finales</small>
+                </div>
+                <div class="form-group">
+                    <!-- Palabra automata -->
+                    <label for="PalabraVerificar">Palabra:</label>
+                    <input type="text" class="form-control" id="palabra2" name="palabra2" placeholder="Ejemplo: abaa">
+                </div>
+                <button type="submit" class="btn btn-outline-success">Aceptar</button>
+                <br>
+                <small>Nota: Los ejemplos de cada campo no aseguran que los datos sean correctos, solamente cumplen con mostrar el formato requerido por la aplicacion</small>
+            </form>
+            <div class="col">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">
+                        <h3>Resultados:</h3>
+                    </div>
+                    <div class="card-body">
+                        {% block content %} {% if respuestas %} {%for respuesta in respuestas %}
+                        <a>{{respuesta}}</a> {% endfor %} {% else %}
+                        <a>En espera del ingreso de datos</a> {% endif %} {% endblock %}
                     </div>
                 </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    </body>
-    <footer class="mt-3">
-        <nav class="navbar navbar-dark bg-dark">
-            <h6 class="text-center text-white">Desarrollado por: Javier Cisternas, Nicolas Ipinza, Ariel Painenao, Felipe Perez, Luis Salinas</h6>
-            <a href="https://github.com/LuisSP97/Tarea-2-Grafos" target="_blank"><i class="fab fa-github" style="color: white; font-size: 30px;"></i></a>
-        </nav>
-    </footer>
-</html> 
+    </div>
+</body>
+{% endblock %} {% block footer %}
+<footer class="mt-3">
+    <nav class="navbar navbar-dark bg-primary">
+        <h6 class="text-center text-white">Desarrollado por: Nicolas Ipinza, Ariel Painenao, Luis Salinas</h6>
+        <a href="https://github.com/barsinsor/tarea_de_grafos_2" target="_blank"><i class="fab fa-github" style="color: white; font-size: 30px;"></i></a>
+    </nav>
+</footer>
+{% endblock %}
