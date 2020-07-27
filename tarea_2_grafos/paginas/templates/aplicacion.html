@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <!-- Palabra automata -->
                     <label for="PalabraVerificar">Palabra:</label>
-                    <input type="text" class="form-control" id="palabra1" name="palabra1" placeholder="Ejemplo: abaa">
+                    <input type="text" class="form-control" id="palabra1" name="palabra1" placeholder="Ejemplo: 0001">
                 </div>
                 <h3>Automata 2</h3>
                 <div class="form-group">
@@ -81,7 +81,7 @@
                 <div class="form-group">
                     <!-- Palabra automata -->
                     <label for="PalabraVerificar">Palabra:</label>
-                    <input type="text" class="form-control" id="palabra2" name="palabra2" placeholder="Ejemplo: abaa">
+                    <input type="text" class="form-control" id="palabra2" name="palabra2" placeholder="Ejemplo: 0101">
                 </div>
                 <button type="submit" class="btn btn-outline-success">Aceptar</button>
                 <br>
@@ -93,9 +93,67 @@
                         <h3>Resultados:</h3>
                     </div>
                     <div class="card-body">
-                        {% block content %} {% if respuestas %} {%for respuesta in respuestas %}
-                        <a>{{respuesta}}</a> {% endfor %} {% else %}
-                        <a>En espera del ingreso de datos</a> {% endif %} {% endblock %}
+                        {% block content %}
+                            {% if inicios %}
+                            <label >transiciones de salida de la union: </label>
+                            {%for unioniniciosOrdenada in inicios %}
+                                <label>{{unioniniciosOrdenada}},</label>
+                            {% endfor %}
+                            </br>
+                            <label >transiciones de llegada de la union: </label>
+                            {%for unionfinalesOrdenada in finales %}
+                                <label>{{unionfinalesOrdenada}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >letras del abecedario de la union: </label>
+                            {%for unionletras in letras %}
+                                <label>{{unionletras}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos iniciales del autamata de la union: </label>
+                            {%for autounion.inicial in automataunionI %}
+                                <label>{{autounion.inicial}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos finales del autamata de la union: </label>
+                            {%for autounion.finales in automataunionF %}
+                                <label>{{autounion.finales}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos inciales del autamata de la interseccion: </label>
+                            {%for interInicios in interinicios %}
+                                <label>{{interInicios}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos finales del autamata de la interseccion: </label>
+                            {%for interFinales in interfinales %}
+                                <label>{{interFinales}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >letras del abecedario de la interseccion: </label>
+                            {%for interLetras in interletras %}
+                                <label>{{interLetras}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos inciales del automata de la interseccion: </label>
+                            {%for variable1 in autointerI %}
+                                <label>{{variable1}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos finales del automata de la interseccion: </label>
+                            {%for variable2 in autointerF %}
+                            <label>{{variable2}}</label>
+                            {% endfor %}
+                            </br>
+                            <label >nodos finales del automata del complemento: </label>
+                            {%for variable3 in automatacom %}
+                            <label>{{variable3}}</label>
+                            {% endfor %}
+                            </br>
+                            {% else %}
+                                <h1>no se a ingresado nada</h1>
+                            {% endif %}
+                        {% endblock %}
                     </div>
                 </div>
             </div>
