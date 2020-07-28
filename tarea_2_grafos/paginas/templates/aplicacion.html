@@ -15,31 +15,31 @@
                 <div class="form-group">
                     <!-- Definicion de nodos -->
                     <label for="NodosDefinidos">K:</label>
-                    <input type="text" class="form-control" id="nodos1" name="nodos1" placeholder="Ejemplo: q0;q1;q2">
+                    <input type="text" class="form-control" id="nodos1" name="nodos1" placeholder="Ejemplo: a;b;.....;etc">
                     <small>Ayuda: Conjunto de identificadores de estados</small>
                 </div>
                 <div class="form-group">
                     <!-- Definicion de abecedario -->
                     <label for="Abecedario">Σ:</label>
-                    <input type="text" class="form-control" id="abcdario1" name="abcdario1" placeholder="Ejemplos: a;b...;etc / 0;1...;etc">
+                    <input type="text" class="form-control" id="abcdario1" name="abcdario1" placeholder="Ejemplos: 0;1;..;etc">
                     <small>Ayuda: Alfabeto de entrada</small>
                 </div>
                 <div class="form-group">
                     <!-- Definicion de transiciones -->
                     <label for="Transiciones">δ:</label>
-                    <input type="text" class="form-control" id="transicion1" name="transicion1" placeholder="Ejemplo: q0,q1,a;q0,q2,b">
-                    <small>Ayuda: Funcion de transicion (Nodo inicio, nodo destino, condicion)</small>
+                    <input type="text" class="form-control" id="transicion1" name="transicion1" placeholder="Ejemplo: a,a,0,;a,b,1,;b,b,0,;b,b,1">
+                    <small>Ayuda: Funcion de transicion (Nodo inicio, nodo destino, condicion)con separacion " ,; " y el final solo con " ; "</small>
                 </div>
                 <div class="form-group">
                     <!-- Nodo inicial -->
                     <label for="NodoInicial">S:</label>
-                    <input type="text" class="form-control" id="nodo_inicial1" name="nodo_inicial1" placeholder="Ejemplo: q0">
+                    <input type="text" class="form-control" id="nodo_inicial1" name="nodo_inicial1" placeholder="Ejemplo: a">
                     <small>Ayuda: Nodo inicial</small>
                 </div>
                 <div class="form-group">
                     <!-- Nodo Final -->
                     <label for="NodoFinal">F:</label>
-                    <input type="text" class="form-control" id="nodo_final1" name="nodo_final1" placeholder="Ejemplo: q1;q2">
+                    <input type="text" class="form-control" id="nodo_final1" name="nodo_final1" placeholder="Ejemplo: a;b">
                     <small>Ayuda: Estados finales</small>
                 </div>
                 <div class="form-group">
@@ -51,31 +51,31 @@
                 <div class="form-group">
                     <!-- Definicion de nodos -->
                     <label for="NodosDefinidos">K:</label>
-                    <input type="text" class="form-control" id="nodos2" name="nodos2" placeholder="Ejemplo: q0;q1;q2">
+                    <input type="text" class="form-control" id="nodos2" name="nodos2" placeholder="Ejemplo: a;b;.....;etc">
                     <small>Ayuda: Conjunto de identificadores de estados</small>
                 </div>
                 <div class="form-group">
                     <!-- Definicion de abecedario -->
                     <label for="Abecedario">Σ:</label>
-                    <input type="text" class="form-control" id="abcdario2" name="abcdario2" placeholder="Ejemplos: a;b...;etc / 0;1...;etc">
+                    <input type="text" class="form-control" id="abcdario2" name="abcdario2" placeholder="Ejemplos:  0;1;..;etc">
                     <small>Ayuda: Alfabeto de entrada</small>
                 </div>
                 <div class="form-group">
                     <!-- Definicion de transiciones -->
                     <label for="Transiciones">δ:</label>
-                    <input type="text" class="form-control" id="transicion2" name="transicion2" placeholder="Ejemplo: q0;q1;a;q0;q2;b">
-                    <small>Ayuda: Funcion de transicion (Nodo inicio, nodo destino, condicion)</small>
+                    <input type="text" class="form-control" id="transicion2" name="transicion2" placeholder="Ejemplo: a,a,0,;a,b,1,;b,b,0,;b,b,1">
+                    <small>Ayuda: Funcion de transicion (Nodo inicio, nodo destino, condicion) con separacion " ,; " y el final solo con " ; " </small>
                 </div>
                 <div class="form-group">
                     <!-- Nodo inicial -->
                     <label for="NodoInicial">S:</label>
-                    <input type="text" class="form-control" id="nodo_inicial2" name="nodo_inicial2" placeholder="Ejemplo: q0">
+                    <input type="text" class="form-control" id="nodo_inicial2" name="nodo_inicial2" placeholder="Ejemplo: a">
                     <small>Ayuda: Nodo inicial</small>
                 </div>
                 <div class="form-group">
                     <!-- Nodo Final -->
                     <label for="NodoFinal">F:</label>
-                    <input type="text" class="form-control" id="nodo_final2" name="nodo_final2" placeholder="Ejemplo: q1;q2">
+                    <input type="text" class="form-control" id="nodo_final2" name="nodo_final2" placeholder="Ejemplo: a;b">
                     <small>Ayuda: Estados finales</small>
                 </div>
                 <div class="form-group">
@@ -150,8 +150,10 @@
                             <label>{{variable3}}</label>
                             {% endfor %}
                             </br>
+                            {% elif verificacion%}
+                            <label >los datos ingresados no son correctos{{repuesta}} </label>
                             {% else %}
-                                <h1>no se a ingresado nada</h1>
+                                <h1>no se a ingresado nada </h1>
                             {% endif %}
                         {% endblock %}
                     </div>

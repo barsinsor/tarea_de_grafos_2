@@ -107,3 +107,19 @@ def ordenar(lista):
         if i not in listaOrdenada:
             listaOrdenada.append(i)
     return listaOrdenada 
+
+def pertenece(abc, palabra):
+    cont = 0
+    palabraaux = []
+    abcaux = []
+    for j in palabra:
+        palabraaux.append(j)
+    abcaux = abc.split(';')
+    for i in abcaux:
+        for k in palabraaux:
+            if (i == k):
+                cont = cont + 1 
+    if (cont > len(abcaux)):
+        return 1
+    else: 
+        return 0

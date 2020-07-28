@@ -42,7 +42,7 @@ def aplicacion(request):
         arraytrans2 = trans2.split(';')
         arraytrans2 = "".join(arraytrans2)
         palabra1 = request.POST['palabra1']
-        palabra2 = request.POST['palabra2']
+        palabra2 = request.POST['palabra2']   
         auto1.nodos = a1.split(';')
         auto2.nodos = a2.split(';')
         auto1.abcdario = ab1.split(';')
@@ -51,45 +51,52 @@ def aplicacion(request):
         auto2.inicial = ai2
         auto1.finales = af1.split(';')
         auto2.finales = af2.split(';')
-        inicio1 = transiciones(arraytrans1,0)
-        inicio2 = transiciones(arraytrans2,0)
-        finales1 = transiciones(arraytrans1,1)
-        finales2 = transiciones(arraytrans2,1)
-        letras1 = transiciones(arraytrans1,2)
-        letras2 = transiciones(arraytrans2,2)
+        verificacion1=pertenece(ab1,palabra1)
+        verificacion2=pertenece(ab2,palabra2)
+        if(verificacion1==1 and verificacion2==1):
+            inicio1 = transiciones(arraytrans1,0)
+            inicio2 = transiciones(arraytrans2,0)
+            finales1 = transiciones(arraytrans1,1)
+            finales2 = transiciones(arraytrans2,1)
+            letras1 = transiciones(arraytrans1,2)
+            letras2 = transiciones(arraytrans2,2)
 
-        unioninicios = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 0)               #Entrega los datos de la union
-        unionfinales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 1)
-        unionletras = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 2)
-        autounion.inicial = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 3)
-        autounion.finales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 4)
-        interInicios = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 0)               #entrega datos de la interseccion
-        interFinales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 1)
-        interLetras = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 2)
-        autoInter.iniciales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 3)
-        autoInter.finales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 5)
+            unioninicios = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 0)               #Entrega los datos de la union
+            unionfinales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 1)
+            unionletras = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 2)
+            autounion.inicial = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 3)
+            autounion.finales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 4)
+            interInicios = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 0)               #entrega datos de la interseccion
+            interFinales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 1)
+            interLetras = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 2)
+            autoInter.iniciales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 3)
+            autoInter.finales = union(auto1, auto2, inicio1, inicio2, letras1, letras2, finales1, finales2, 5)
 
-        auto1Com = auto1                                                                                            #complemento
-        auto1Com.finales = complemento (auto1)
-        NodosLista1 = crearNodos(finales1, letras1, auto1)
-        NodosLista2 = crearNodos(finales2, letras2, auto2)
-        unioniniciosOrdenada=ordenar(unioninicios)
-        unionfinalesOrdenada=ordenar(unionfinales)
-        autounion.nodos = unioniniciosOrdenada
-        variable1=autoInter.iniciales
-        variable2=autoInter.finales
-        variable3=auto1Com.finales
-        contexto={'inicios':unioniniciosOrdenada,
-                  'finales':unionfinalesOrdenada,
-                  'letras':unionletras,
-                  'automataunionI':autounion.inicial,
-                  'automataunionF':autounion.finales,
-                  'interinicios':interInicios,
-                  'interfinales':interFinales,
-                  'interletras':interLetras,
-                  'autointerI':variable1,
-                  'autointerF':variable2,
-                  'automatacom':variable3
-                }
-        return render(request,'aplicacion.html',contexto)
+            auto1Com = auto1                                                                                            #complemento
+            auto1Com.finales = complemento (auto1)
+            NodosLista1 = crearNodos(finales1, letras1, auto1)
+            NodosLista2 = crearNodos(finales2, letras2, auto2)
+            unioniniciosOrdenada=ordenar(unioninicios)
+            unionfinalesOrdenada=ordenar(unionfinales)
+            autounion.nodos = unioniniciosOrdenada
+            variable1=autoInter.iniciales
+            variable2=autoInter.finales
+            variable3=auto1Com.finales
+            contexto={'inicios':unioniniciosOrdenada,
+                    'finales':unionfinalesOrdenada,
+                    'letras':unionletras,
+                    'automataunionI':autounion.inicial,
+                    'automataunionF':autounion.finales,
+                    'interinicios':interInicios,
+                    'interfinales':interFinales,
+                    'interletras':interLetras,
+                    'autointerI':variable1,
+                    'autointerF':variable2,
+                    'automatacom':variable3
+                    }
+            return render(request,'aplicacion.html',contexto)
+        else:
+            respuesta="los datos ingresados no son correctos"
+            contexto2={'verificacion': respuesta}
+            return render(request,'aplicacion.html',contexto2)
     return render(request, 'aplicacion.html')
